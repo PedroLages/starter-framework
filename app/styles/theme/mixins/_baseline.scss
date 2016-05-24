@@ -1,0 +1,47 @@
+// Baseline gives the perfect vertical rhythm
+
+// Quickly generate a font-size in rems, with a pixel fallback
+//
+// h1 {
+//     @include font-size(24px);
+// }
+//
+@mixin font-size($font-size, $line-height: true) {
+  font-size: $font-size;
+  font-size: ($font-size / $root-font-size) * 1rem;
+
+  @if $line-height == true {
+      line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
+  }
+}
+
+// Space elements by an amount based on your magic number.
+//
+// pre {
+//     @include baseline-space(padding-left);
+// }
+//
+@mixin baseline-space($property) {
+  #{$property}: 2 * $baseline-magic-number;
+  #{$property}: 2 * $baseline-magic-ratio + rem;
+}
+
+// A small, internally-used function to remove the units from a given value.
+@function baseline-strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+/*------------------------------------*\
+    #SHARED
+\*------------------------------------*/
+
+%baseline-reset {
+  margin:  0;
+  padding: 0;
+}
+
+%baseline-vertical-rhythm {
+  @extend %baseline-reset;
+  margin-bottom: $baseline-magic-number;
+  margin-bottom: $baseline-magic-ratio + rem;
+}

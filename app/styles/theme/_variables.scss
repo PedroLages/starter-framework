@@ -1,0 +1,223 @@
+@import "functions";
+//@import "mixins";
+
+//Variables
+
+// Table of ontents
+//
+// Colors
+// Body
+// Links
+// Typography
+// Screens Sizes
+// Layout
+
+// Baseline settings
+//
+// Indented (rather than spaced) paragraph delimiting?
+$baseline-indented-paragraphs: false !default;
+
+// Show a baseline grid?.
+$baseline-show-baseline:       false !default;
+
+// Containers width´s
+// - Define the maximum width of `.container`  == false
+// - Fluid containers -- full width of `.container`== true
+$enable-fluid-containers:       true !default;
+
+// Flex grid
+$enable-flex:                  false !default;
+
+
+// General variable structure
+
+// Colors
+$white:                       #fff !default;
+$dark:                        #21252b !default;
+$black:                       #000 !default;
+
+
+// Brand colors
+$royal:                       #405264 !default;
+$red:                         #db5566 !default;
+$cyan:                        #1ccdca !default;
+$green:                       #2ecc71 !default;
+$grass:                       #a5d25b !default;
+$blue:                        #21C2F8 !default;
+$orange:                      #f9690e !default;
+$purple:                      #6d5eac !default;
+$smoke:                       #757b84 !default;
+$white-smoke:                 #f7f7f7 !default;
+
+// GT Scores
+$love:                        $green !default;
+$like:                        $grass !default;
+$good:                        $orange !default;
+$bad:                         #ef1616 !default;
+
+
+//  Base color
+$base-color:                  $cyan !default;
+
+
+// Functional color variables
+$base-color-lighter:          tint($base-color, 80%) !default;
+$base-color-light:            tint($base-color, 20%) !default;
+$base-color-dark:             shade($base-color, 16.5%) !default;
+$base-color-darker:           shade($base-color, 40%) !default;
+
+$royal-lighter:               tint($royal, 80%) !default;
+$royal-light:                 tint($royal, 20%) !default;
+$royal-dark:                  shade($royal, 6.5%) !default;
+$royal-darker:                shade($royal, 16.5%) !default;
+
+$red-lighter:                 tint($red, 80%) !default;
+$red-light:                   tint($red, 20%) !default;
+$red-dark:                    shade($red, 16.5%) !default;
+$red-darker:                  shade($red, 40%) !default;
+
+$cyan-lighter:                tint($cyan, 80%) !default;
+$cyan-light:                  tint($cyan, 20%) !default;
+$cyan-dark:                   shade($cyan, 16.5%) !default;
+$cyan-darker:                 shade($cyan, 40%) !default;
+
+$green-lighter:               tint($green, 80%) !default;
+$green-light:                 tint($green, 20%) !default;
+$green-dark:                  shade($green, 16.5%) !default;
+$green-darker:                shade($green, 40%) !default;
+
+$grass-lighter:               tint($grass, 80%) !default;
+$grass-light:                 tint($grass, 20%) !default;
+$grass-dark:                  shade($grass, 16.5%) !default;
+$grass-darker:                shade($grass, 40%) !default;
+
+$blue-lighter:                tint($blue, 80%) !default;
+$blue-light:                  tint($blue, 20%) !default;
+$blue-dark:                   shade($blue, 16.5%) !default;
+$blue-darker:                 shade($blue, 40%) !default;
+
+$orange-lighter:              tint($orange, 80%) !default;
+$orange-light:                tint($orange, 20%) !default;
+$orange-dark:                 shade($orange, 16.5%) !default;
+$orange-darker:               shade($orange, 40%) !default;
+
+$purple-lighter:              tint($purple, 80%) !default;
+$purple-light:                tint($purple, 20%) !default;
+$purple-dark:                 shade($purple, 16.5%) !default;
+$purple-darker:               shade($purple, 40%) !default;
+
+$smoke-lighter:               tint($smoke, 80%) !default;
+$smoke-light:                 tint($smoke, 20%) !default;
+$smoke-dark:                  shade($smoke, 16.5%) !default;
+$smoke-darker:                shade($smoke, 40%) !default;
+
+
+// Settings for the `<body>` element.
+$body-bg:                     $white !default;
+$base-font-color:             $smoke-dark !default;
+$base-font-size:              rem(16px) !default;
+$selection-color:             $base-color !default;
+
+
+// Links
+//
+// Style anchor elements.
+$link-color:                  $royal-darker !default;
+$link-hover-color:            $base-color !default;
+$link-visited-color:          $blue-darker !default;
+$link-hover-decoration:       underline !default;
+$base-animation-duration:     .4s !default;
+
+// Navigation
+$nav-bg-color:                 $royal;
+$nav-link-color:               $white-smoke;
+$nav-link-hover-color:         $royal;
+
+
+// Typography
+// Baseline rhythm default
+//
+// Pixel value used to responsively scale all typography.
+$root-font-size:              16px;
+$base-font-size:              rem(16px);
+$base-line-height:            24px !default;
+
+$baseline-magic-number:        $base-line-height;
+$baseline-magic-ratio:         $base-line-height / $root-font-size;
+
+// Baseline Headings ( h1 - h2 - h3 - h3 - h4 - h5 - h6 )
+
+$font-size-h1:                48px !default;
+$font-size-h2:                36px !default;
+$font-size-h3:                30px !default;
+$font-size-h4:                24px !default;
+$font-size-h5:                20px !default;
+$font-size-h6:                18px !default;
+
+// Titles - fonts sizes & colors
+$heading-color:               $royal !default;
+$title-big-size:              rem(60px) !default;
+$title-medium-size:           rem(30px) !default;
+$title-small-size:            rem(24px) !default;
+
+// Blockquote - font-size
+$font-size-blockquote:        rem(32px) !default;
+$font-size-blockquote-footer: rem(20px) !default;
+
+// Font face
+$helvetica:                   "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$georgia:                     Georgia, "Times New Roman", Times, serif !default;
+$monospace:                   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$open-sans:                   "Open Sans", sans-serif !default;
+$oswald:                      "Oswald", "Open Sans", sans-serif !default;
+$lato:                        "Lato",sans-serif !default;
+$roboto-slab:                 "Roboto Slab", Helvetica, Arial, sans-serif !default;
+
+// Base fonts family
+$base-font-family:            $open-sans !default;
+$font-title:                  $roboto-slab !default;
+
+
+// Screens Device breakpoints
+$sm-phone:                    rem(320px);
+$phone:                       rem(480px);
+$phablet:                     rem(640px);
+$tablet:                      rem(768px);
+$desktop:                     rem(992px);
+$wide:                        rem(1200px);
+
+// Grid columns
+$grid-columns:               12 !default;
+$grid-gutter-width:          rem(30px) !default;
+
+// Layout
+$max-content-width:           $wide !default;
+$base-border-radius:          rem(4px) !default;
+$gutter:                      5%;
+
+
+// Grid breakpoints
+//
+// Define the minimum and maximum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  phone:     0,
+  phablet:   $phablet,
+  tablet:    $tablet,
+  desktop:   $desktop,
+  wide:      $wide
+) !default;
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  phone:     $phone,
+  phablet:   $phablet,
+  tablet:    $tablet,
+  desktop:   $desktop,
+  wide:      $wide
+) !default;

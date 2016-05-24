@@ -1,0 +1,21 @@
+// Core
+@import "theme/variables";
+@import "theme/functions";
+@import "theme/mixins";
+
+// Reset
+@import "vendors/sanitize";
+
+// Base
+@import "theme/base";
+
+// Components
+@import "theme/icons";
+
+// Layout
+@import "theme/layout";
+@import "theme/sidebar";
+@import "theme/footer";
+
+// Main
+@import "main-styles";

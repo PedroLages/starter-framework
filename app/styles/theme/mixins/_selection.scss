@@ -1,0 +1,13 @@
+@mixin selection($selection) {
+  ::-webkit-selection {
+  	background: $selection; color: #fff; text-shadow: none;
+  }
+
+  ::-moz-selection    {
+  	background: $selection; color: #fff; text-shadow: none;
+  }
+
+  ::selection         {
+  	background: $selection; color: #fff; text-shadow: none;
+  }
+}

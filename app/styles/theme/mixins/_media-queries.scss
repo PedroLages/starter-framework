@@ -1,0 +1,131 @@
+@import "../variables";
+
+//  Media Queries
+//
+// Eg: @include media(min, desktop);
+
+@mixin media( $width, $breakpoint: null, $min: min-width, $max: max-width ) {
+
+  @if $breakpoint == null {
+    @media (#{$min}: $width) {
+        @content;
+    }
+  }
+
+  @else if $breakpoint == max {
+    @media (#{$max}:  $width - rem(1px)) {
+        @content;
+    }
+  }
+}
+
+
+// Custom Min and Max Width Breakpoints -------------//
+
+// Eg: @include min-max(phone, desktop);
+
+@mixin min-max($min:breakpoint, $max:breakpoint ) {
+
+    @media (min-width: #{$min})  and (max-width: #{($max - rem(1px)) }) {
+        @content;
+    }
+}
+
+//  Retina Screens
+
+// Eg: @include dpi(2)
+
+@mixin dpi($ratio: 2) {
+  @media only screen
+    and (-webkit-min-device-pixel-ratio: $ratio)
+    and (min--moz-device-pixel-ratio: $ratio)
+    and (-o-min-device-pixel-ratio: #{$ratio}/1)
+    and (min-resolution: round($ratio * 96dpi))
+    and (min-resolution: $ratio * 1dppx) { @content; }
+}
+
+// Custom Breakpoint
+
+// Eg: @include retina($phone, $tablet , 2)
+
+@mixin retina($min:breakpoint, $max:breakpoint, $ratio: 2 ) {
+  @media (min-width: #{$min})
+    and (max-width: #{$max - rem(1px)})
+    and (-webkit-min-device-pixel-ratio: $ratio)
+    and (min--moz-device-pixel-ratio: $ratio)
+    and (-o-min-device-pixel-ratio: #{$ratio}/1)
+    and (min-resolution: round($ratio * 96dpi))
+    and (min-resolution: $ratio * 1dppx){@content;}
+}
+
+
+
+
+// Media queries only for the grid
+//
+//    >> breakpoint-next(sm)
+//    md
+//    >> breakpoint-next(sm, (xs: 0, sm: 544px, md: 768px))
+//    md
+//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md))
+//    md
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 544px, md: 768px))
+//    544px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  @include media-breakpoint-up($name, $breakpoints) {
+    @include media-breakpoint-down($name, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  @include media-breakpoint-up($lower, $breakpoints) {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}

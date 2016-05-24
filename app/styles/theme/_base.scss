@@ -1,0 +1,283 @@
+
+/* BASE */
+
+* {
+  box-sizing:              border-box;
+  @include                 clearfix;
+}
+
+
+/* Body */
+
+html {
+	font-size:              100%;
+
+	@if $baseline-show-baseline == true {
+		$baseline-size: baseline-strip-units($baseline-magic-number);
+		background-image: url(http://basehold.it/i/#{$baseline-size});
+	}
+}
+
+body {
+  position:              relative;
+  color:                 $base-font-color;
+  background:            $body-bg;
+	@include               font-size(16px);	// font-size: 1rem; line-height: 1.5;
+  font-family:           $base-font-family;
+	margin:                0;
+	padding:               0;
+}
+
+
+/* Links */
+
+a:link {
+  outline:               none;
+  color:                 $link-color;
+  transition:            all $base-animation-duration ease;
+
+  &:hover {
+    color:                $link-hover-color;
+  }
+
+  a:link,
+  &:hover,
+  &:visited,
+  &:active ,
+  &:focus {
+    text-decoration:       none;
+  }
+}
+
+
+/* Images, Objects, and Applets */
+
+img, object, embed {
+  max-width:             100%;
+  vertical-align:        top;
+}
+
+
+/* Selection */
+
+@include selection($selection-color);
+
+
+/* Inputs */
+
+input,
+label {
+  vertical-align:       middle;
+}
+
+input[type=submit] {
+  font-size:            rem(16px);
+  font-family:          Lato;
+  text-transform:       uppercase;
+  padding:              rem(12px) rem(10px);
+  color:                $white;
+  cursor:               pointer;
+  border:               none;
+  font-weight:          900;
+  transition:           all $base-animation-duration ease;
+}
+
+input[type=text],
+input[type=submit],
+input[type=email],
+input[type=password],
+textarea {
+  color:                $smoke-light;
+  border:               1px solid $smoke-lighter;
+  background:           rgba(0,0,0,0);
+}
+
+input[type=email],
+input[type=password],
+input[type=text] {
+  width:                100%;
+}
+
+input[type=email],
+input[type=password],
+input[type=text], textarea {
+  font-family:          Lato;
+  font-size:            rem(14px);
+  background:           #fff;
+  border:               1px solid rgba(0,0,0,.1);
+  line-height:          20px;
+  color:                #999;
+  padding:              10px 20px 11px;
+}
+
+input[type=text],
+#footer input[type=email],
+div form:first-child,
+form,
+form div:first-child {
+  margin-top:           0;
+}
+
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6{
+  color:                 $heading-color;
+}
+
+h1 {
+  @extend %baseline-vertical-rhythm;
+  @include font-size($font-size-h1);
+}
+
+h2 {
+  @extend %baseline-vertical-rhythm;
+  @include font-size($font-size-h2);
+}
+
+h3 {
+  @extend %baseline-vertical-rhythm;
+  @include font-size($font-size-h3);
+}
+
+h4 {
+  @extend %baseline-vertical-rhythm;
+  @include font-size($font-size-h4);
+}
+
+h5 {
+  @extend %baseline-vertical-rhythm;
+  @include font-size($font-size-h5);
+}
+
+h6 {
+  @extend %baseline-vertical-rhythm;
+  @include font-size($font-size-h6);
+}
+
+
+/* Lists */
+
+ul, ol, dd {
+  @extend %baseline-vertical-rhythm;
+  @include baseline-space(margin-left);
+}
+
+li > ul,
+li > ol {
+  margin-bottom:      0;
+}
+
+
+/* Paragraphs */
+
+p {
+  @extend %baseline-vertical-rhythm;
+
+  @if $baseline-indented-paragraphs == true {
+    + p {
+        @include baseline-space(text-indent);
+        margin-top: -$baseline-magic-number;
+        margin-top: -$baseline-magic-ratio + rem;
+    }
+	}
+}
+
+/**
+ * Not strictly a paragraph, but probably doesn’t need its own section.
+ */
+address {
+  @extend %baseline-vertical-rhythm;
+}
+
+
+/* Code */
+
+pre {
+  @extend %baseline-vertical-rhythm;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family:        monospace, monospace; /* [1] */
+}
+
+
+/* Quotes */
+
+blockquote {
+  text-indent: -0.41em; /* [1] */
+}
+
+blockquote {
+  @extend %baseline-vertical-rhythm;
+  quotes: "“" "”";
+  @include baseline-space(margin-left);
+
+    p {
+
+      &:before {
+        content: "“";
+        content: open-quote;
+      }
+
+      &:after {
+        content: "";
+        content: no-close-quote;
+      }
+
+      &:last-of-type:after {
+        content: "”";
+        content: close-quote;
+      }
+    }
+}
+
+q {
+  quotes: "‘" "’" "“" "”";
+
+  &:before {
+    content: "‘";
+    content: open-quote;
+  }
+
+  &:after {
+    content: "’";
+    content: close-quote;
+  }
+
+  q:before {
+    content: "“";
+    content: open-quote;
+  }
+
+  q:after{
+    content: "”";
+    content: close-quote;
+  }
+
+  /**
+   * If an element opens with an inline quote, let’s hang that.
+   */
+  &:first-child {
+    display: inline-block;
+    text-indent: -0.22em;
+  }
+}
+
+
+/* Tables */
+
+table {
+  @extend %baseline-vertical-rhythm;
+  width:              100%;
+  border-collapse:    collapse;
+  border-spacing:     0;
+}
+
+th,
+td {
+  padding:            $base-line-height / 2;
+}

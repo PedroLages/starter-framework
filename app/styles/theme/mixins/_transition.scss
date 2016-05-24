@@ -1,0 +1,11 @@
+// Transition
+@mixin transition($transition...) {
+}
+
+@mixin base-transition {
+  -webkit-transition: all .4s linear;
+  -moz-transition: all .4s linear;
+  -o-transition: all .4s linear;
+  -ms-transition: all .4s linear;
+  transition: all .4s linear;
+}
