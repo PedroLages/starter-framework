@@ -43,6 +43,8 @@ gulp.task('html', function() {
         .pipe(browserSync.stream());
 });
 
+gulp.task('html-watch', ['html'], browserSync.reload);
+
 // Watch images files and return the stream.
 gulp.task('images', function() {
   return gulp.src('app/images/**/*.+(png|jpg|gif|svg)')
@@ -64,8 +66,8 @@ gulp.task('fonts', function() {
     .pipe(browserSync.stream());
 });
 
-// use default task to launch Browsersync and watch JS files
-gulp.task('serve', ['js','css', 'html', 'images', 'fonts'], function () {
+// use default task to launch Browsersync and watch files
+gulp.task('serve', ['js','css', 'html', 'images', 'fonts'],  function () {
 
     // Serve files from the root of this project
     browserSync.init({
@@ -77,7 +79,7 @@ gulp.task('serve', ['js','css', 'html', 'images', 'fonts'], function () {
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
     gulp.watch('app/styles/*.scss', ['css']);
-    gulp.watch('app/*.html').on('change', browserSync.reload);
+    gulp.watch('app/*.html', ['html-watch']);
     gulp.watch('app/scripts/*.js', ['js-watch']);
     gulp.watch('app/images/*', ['images']);
     gulp.watch('app/fonts/*', ['fonts']);
@@ -85,11 +87,11 @@ gulp.task('serve', ['js','css', 'html', 'images', 'fonts'], function () {
 
 // Clean
 gulp.task('clean', function() {
-  return del.sync('public');
+  return del.sync('public/');
 });
 
 gulp.task('default', function (callback) {
-  runSequence('clean', ['clean','serve'],
+  runSequence('clean', ['serve'],
     callback
   );
 });
